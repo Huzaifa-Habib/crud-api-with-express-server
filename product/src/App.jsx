@@ -6,6 +6,10 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 
 
@@ -27,6 +31,16 @@ function App() {
   const [editPrice,setEditPrice] =useState ("") 
   const [editDesc,setEditDesc] =useState ("") 
   const [editId,setEditId] =useState (null) 
+  const [searchId,setSearchId] =useState (null) 
+  
+  const [searchData,setSearchData] =useState ("") 
+  const [show1, setShow1] = useState(false);
+
+  const handleClose = () => setShow1(false);
+  // const handleShow = () => setShow(true);
+  
+
+
 
 
 
@@ -174,12 +188,55 @@ function App() {
 
   }
 
+
+  const getProductHandlerOnId = () =>{
+    setShow1(true)
+    axios.get(`${baseUrl}/product/${searchId}`)
+    .then((response) => {
+      console.log(response);
+      setSearchData(response.data.data)
+
+
+     
+    }, (error) => {
+      console.log(error);
+    });
+
+  }
+
   
 
 
 
   return (
     <div className='main-div'>
+      <div >
+      <Navbar bg="dark" expand="lg" >
+      <Container fluid className='nav' >
+        <Navbar.Brand className='nav-a'>Product App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+           
+          </Nav>
+          <Form className="d-flex">
+          <input type="number" className='input' placeholder='Enter Product Id' onChange={(e) =>{
+            setSearchId(e.target.value)
+             }} />
+
+            <Button variant="outline-success" onClick={getProductHandlerOnId} >Search</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+        
+
+
+      </div>
   
 
       <div className='add' id='add'>
@@ -223,6 +280,16 @@ function App() {
 
 
         </form>
+      </div>
+
+      <div className='onSearchDisplay'>
+       
+
+        {/* <button onClick={getProductHandlerOnId}>
+          Get
+
+        </button> */}
+
       </div>
 
 
@@ -323,26 +390,18 @@ function App() {
           <Modal.Body>
             <form onSubmit={updateProductHandler} >
                 <input type="text" defaultValue = {editName} name = "product"
-                  // onChange = {(e) =>{
-                  //   setEditedName(e.target.value)
-
-                  // }} 
+              
                 />
+                <br />
+              
             
-
-      
           
                 <input type="text" defaultValue = {editPrice} name = "price"
-                  // onChange = {(e) =>{
-                  //   setEditedPrice(e.target.value)
-      
-                  // }} 
+                  
                 />
+                <br />
                 <textarea name="description" id="" cols="80" rows="5" defaultValue={editDesc} 
-                  // onChange = {(e) =>{
-                  //   setEditedDesc(e.target.value)
-      
-                  // }} 
+                 
                 ></textarea>
               <Button variant="primary" type='submit' >Save Changes</Button>
 
@@ -359,18 +418,36 @@ function App() {
 
         </div>
 
+      </div>
 
 
+      <div className='onSearchData'>
+        
+          <Modal
+            show={show1}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Your Data of id: {searchData?.id} </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+             
+             <p>Name: {searchData?.names}</p>
+             <p>Price: {searchData?.price}</p>
+             <p>Description: {searchData?.description}</p>
 
+             
 
-
-
-
-
-
-
-
-
+            
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Ok.
+              </Button>
+            </Modal.Footer>
+          </Modal>
 
       </div>
 

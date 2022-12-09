@@ -51,7 +51,7 @@ app.get('/products', (req, res) => {
 })
 app.get('/product/:id', (req, res) => {
 
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     let isFound = false;
     for (let i = 0; i < products.length; i++) {
