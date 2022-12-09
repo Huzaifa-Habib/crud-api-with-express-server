@@ -1,0 +1,94 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(128, 128, 128, 0.144);
+  /* overflow: hidden; */
+
+
+}
+
+.main-div{
+  margin-top: 20px;
+}
+
+.add{
+  display: none;
+}
+
+.input-div{
+  background-color: white;
+  width: calc(60vw);
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+
+.input-div input,textarea{
+  width: 100%;
+  display: block;
+  margin-top: 5px;
+  padding: 5px 0px;
+  border: 1px solid rgba(128, 128, 128, 0.226);
+  border-radius: 5px;
+  padding-left: 5px;
+  outline: none;
+}
+
+.input-div textarea:focus{
+  outline: 2px solid dodgerblue;
+}
+
+.input-div input:focus{
+  outline: 2px solid dodgerblue;
+}
+
+.btn{
+  margin-top: 20px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 25%;
+  font-weight: bold !important;
+
+
+}
+
+
+.alert-div{
+  display: none;
+  position: absolute;
+  width: calc(100vw);
+  height: calc(100vh);
+  background-color: rgba(0, 0, 0, 0.315);
+
+
+  
+}
+
+.show-alert{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+
+
+}
+
+.display-div{
+  display: none;
+
+}
+
