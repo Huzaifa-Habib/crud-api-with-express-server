@@ -27,9 +27,7 @@ function App() {
   const [editPrice,setEditPrice] =useState ("") 
   const [editDesc,setEditDesc] =useState ("") 
   const [editId,setEditId] =useState (null) 
-  const [editedName,setEditedName] =useState ("") 
-  const [editedPrice,setEditedPrice] =useState ("") 
-  const [editedDesc,setEditedDesc] =useState ("") 
+
 
 
   
@@ -57,9 +55,6 @@ function App() {
       console.log(error);
     });
 
-
- 
-    
 
 
   }
@@ -147,10 +142,6 @@ function App() {
     // console.log(editName)
 
 
-
-  
- 
-
   }
 
   const updateProductHandler = (event) =>{
@@ -169,13 +160,15 @@ function App() {
     })
     .then((response) => {
       console.log(response);
+      alert("Your Product got updated check it out.")
+      window.location.reload()
      
     }, (error) => {
       console.log(error);
     });
 
     
-    alert("Your Product got updated check it out.")
+  
 
 
 
@@ -187,12 +180,10 @@ function App() {
 
   return (
     <div className='main-div'>
-      <div>
-
-      </div>
+  
 
       <div className='add' id='add'>
-        <button onClick={addShow}>Add Product</button>
+        <Button variant='primary' onClick={addShow}>Add Product</Button>
 
       </div>
        <div className='alert-div' id='alert'>
@@ -247,11 +238,10 @@ function App() {
         {
 
               (allData.length !== 0)?
-                allData.map((eachData,i) => (
-                  <div key={i}>
+                  <div className='table'>
 
                   
-                    <Table  striped bordered hover variant="dark">
+                    <Table responsive="xl"  striped bordered hover variant="dark"  >
                       <thead>
                         <tr>
                           <th>#ID</th>
@@ -260,7 +250,9 @@ function App() {
                           <th>Description</th>
                         </tr>
                       </thead>
-                      <tbody>
+                     { allData.map((eachData,i) => (  
+                      
+                     <tbody key={i}>
                         <tr>
                           <td>{eachData?.id}</td>
                           <td>{eachData?.names}</td>
@@ -272,7 +264,6 @@ function App() {
                           }}>Delete</button>
 
                           <button onClick={()=>{
-                            // handleData(eachData.id,eachData?.names,eachData?.price,eachData?.description)
                           handleData(
                             setEditId(eachData.id),
                             setEditName(eachData?.names),
@@ -291,11 +282,14 @@ function App() {
                         
                      
                       </tbody>
+                      ))}
+
+                    
                     </Table>
 
 
                   </div>
-                ))
+              
 
                 :
                 <Alert variant="danger" onClose={() => setShow(false)} >
@@ -312,6 +306,9 @@ function App() {
 
               
         }
+
+
+      
 
         <div className='modal-div'>
           <Modal
