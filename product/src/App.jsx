@@ -292,7 +292,7 @@ function App() {
               
 
                 :
-                <Alert variant="danger" onClose={() => setShow(false)} >
+                <Alert variant="danger" style={{marginTop: "10px"}} onClose={() => setShow(false)} >
                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
                 <p>
                   There is nothing to show you. Your Product list is empty. You should add
