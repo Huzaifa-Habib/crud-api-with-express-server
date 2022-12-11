@@ -10,16 +10,15 @@ body{
 }
 
 /* .main-div{
-  margin-top: 20px;
+  overflow: hidden;
+  height: calc(100vh);
+
 } */
 
-.add{
-  display: none;
-}
 
 .input-div{
   background-color: white;
-  width: calc(60vw);
+  width: calc(50vw);
   margin-left: auto;
   margin-right: auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -30,17 +29,25 @@ body{
   padding-right: 10px;
   margin-bottom: 40px;
   padding-bottom: 10px;
+  margin-top: 10%;
 }
 
 .input-div input,textarea{
   width: 100%;
-  display: block;
   margin-top: 5px;
   padding: 5px 0px;
   border: 1px solid rgba(128, 128, 128, 0.226);
   border-radius: 5px;
   padding-left: 5px;
   outline: none;
+}
+
+.input-div input{
+  margin-top: 20px;
+}
+
+textarea{
+  margin-top: 20px !important;
 }
 
 .input-div textarea:focus{
@@ -87,10 +94,11 @@ body{
 
 }
 
-.display-div{
-  display: none;
+/* .display-div{
+  overflow: scroll;
+  height: calc(100vh);
 
-}
+} */
 
 .table{
   margin-top: 20px;
@@ -98,6 +106,7 @@ body{
 table tbody tr td{
   text-align:justify;
   text-justify: inter-word;
+  text-transform: capitalize;
 
 
 }
@@ -108,15 +117,20 @@ table tbody tr td:nth-child(4) button:nth-child(1){
 }
 
 table tbody tr td:nth-child(4) button{
-  margin-left: 10px;
   background-color: yellow;
   font-weight: bold;
   color: black;
   border: none;
   border-radius: 10px;
   padding: 2px 20px;
+  margin-top: 5px;
 
 
+
+}
+
+table tbody tr td:nth-child(4) button:nth-child(3){
+  margin-left: 10px;
 }
 
 .nav{
@@ -125,6 +139,7 @@ table tbody tr td:nth-child(4) button{
 
 .nav-a{
   color: white !important;
+  padding-left: 10px;
 }
 
 
@@ -137,6 +152,15 @@ table tbody tr td:nth-child(4) button{
   border-radius: 10px;
 }
 
+.emptyError,.lengthError,.descLengthError,.descEmptyError{
+  display: none;
+  font-size: 12px;
+  font-family: monospace;
+  font-weight: bold;
+  padding-left: 10px;
+  color: red;
+
+}
 
 
 

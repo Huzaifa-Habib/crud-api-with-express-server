@@ -19,7 +19,7 @@ app.post('/product', (req, res) => {
   if ( // validation
       !body.name
       && !body.price
-      && !body.description
+      || !body.description
   ) {
       res.status(400).send({
           message: "required parameters missing",

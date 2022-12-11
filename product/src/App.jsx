@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
@@ -7,8 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Navbar from 'react-bootstrap/Navbar';
 
 
@@ -38,6 +39,7 @@ function App() {
 
   const handleClose = () => setShow1(false);
   // const handleShow = () => setShow(true);
+  const [loadProduct, setLoadProduct] = useState(false)
   
 
 
@@ -64,6 +66,9 @@ function App() {
     .then((response) => {
       console.log(response);
       setData(response.data.data)
+      setLoadProduct(!loadProduct)
+      alertHandler()
+
      
     }, (error) => {
       console.log(error);
@@ -99,31 +104,31 @@ function App() {
       console.log(error);
     });
 
-        let displayDiv = document.getElementById("display")
-        displayDiv.style.display = "block"
+        // let displayDiv = document.getElementById("display")
+        // displayDiv.style.display = "block"
         
-        let addBtn = document.getElementById("add")
-        addBtn.style.display = "block"
+        // let addBtn = document.getElementById("add")
+        // addBtn.style.display = "block"
 
-        let inputDiv = document.getElementById("input")
-        inputDiv.style.display = "none" 
-
-
-  }
-
-
-  const addShow = () =>{
-    let inputDiv = document.getElementById("input")
-    inputDiv.style.display = "block" 
-
-    let displayDiv = document.getElementById("display")
-    displayDiv.style.display = "none"
-
-    let addBtn = document.getElementById("add")
-    addBtn.style.display = "none"
+        // let inputDiv = document.getElementById("input")
+        // inputDiv.style.display = "none" 
 
 
   }
+
+
+  // const addShow = () =>{
+  //   let inputDiv = document.getElementById("input")
+  //   inputDiv.style.display = "block" 
+
+  //   let displayDiv = document.getElementById("display")
+  //   displayDiv.style.display = "none"
+
+  //   let addBtn = document.getElementById("add")
+  //   addBtn.style.display = "none"
+
+
+  // }
 
   const deleteProductHandler = (ids) =>{
     console.log(ids)
@@ -131,7 +136,8 @@ function App() {
     .then(response => {
       console.log("response: ", response);
       alert("Product Deleted Successfully")
-      window.location.reload();
+      setLoadProduct(!loadProduct)
+     
 
     })
 
@@ -175,7 +181,7 @@ function App() {
     .then((response) => {
       console.log(response);
       alert("Your Product got updated check it out.")
-      window.location.reload()
+      setLoadProduct(!loadProduct)
      
     }, (error) => {
       console.log(error);
@@ -187,7 +193,6 @@ function App() {
 
 
   }
-
 
   const getProductHandlerOnId = () =>{
     setShow1(true)
@@ -204,45 +209,137 @@ function App() {
 
   }
 
+  useEffect(() => {
+
+    allProductsHandler()
+
+  }, [loadProduct])
+
+  let emptyError = document.querySelector(".emptyError")
+  let lengthError = document.querySelector(".lengthError")
+  let descEmptyError = document.querySelector(".descEmptyError")
+  let descError = document.querySelector(".descLengthError")
+
+  const nameHandler = (e) =>{
+    if (e.target.value == "") {
+      emptyError.style.display = "block"
+      lengthError.style.display = "none"
+
+    }
+
+    else{
+      emptyError.style.display = "none"
+      lengthError.style.display = "none"
+
+
+
+    }
+
+  }
+
+  const nameError = (e) =>{
+    if (e.target.value.length < 3) {
+      lengthError.style.display = "block"
+      emptyError.style.display = "none"
+
+    }
+
+    else{
+      lengthError.style.display = "none"
+      emptyError.style.display = "none"
+
+
+
+    }
+
+  }
+
+
+
+
+  const descHandler = (e) =>{
+    if (e.target.value == "") {
+      descEmptyError.style.display = "block"
+      descError.style.display = "none"
+
+    }
+
+    else{
+      descEmptyError.style.display = "none"
+      descError.style.display = "none"
+
+
+
+    }
+
+  }
+
+  const descLengthError = (e) =>{
+    if (e.target.value.length < 3) {
+      descError.style.display = "block"
+      descEmptyError.style.display = "none"
+
+    }
+
+    else{
+      descEmptyError.style.display = "none"
+      descError.style.display = "none"
+
+
+
+    }
+
+  }
+
+
+  
+
   
 
 
 
   return (
     <div className='main-div'>
-      <div >
-      <Navbar bg="dark" expand="lg" >
-      <Container fluid className='nav' >
-        <Navbar.Brand className='nav-a'>Product App</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-           
-          </Nav>
-          <Form className="d-flex">
-          <input type="number" className='input' placeholder='Enter Product Id' onChange={(e) =>{
-            setSearchId(e.target.value)
-             }} />
+      <div className='nav-div' >
+          <Navbar bg="dark" expand="lg" fixed="top">
+            <Container fluid className='nav' >
+              <Navbar.Brand className='nav-a'>Product App</Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse id="navbarScroll">
+                <Nav
+                  className="me-auto my-2 my-lg-0"
+                  style={{ maxHeight: '100px' }}
+                  navbarScroll
+                >
+                
+                </Nav>
+                <Form className="d-flex">
+                     <Form.Control
+                        type="number"
+                        placeholder='Enter Product Id'
+                        className="me-2"
+                        aria-label="Search"
 
-            <Button variant="outline-success" onClick={getProductHandlerOnId} >Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+                        onChange={(e) =>{
+                          setSearchId(e.target.value)
+                          }}
+                    />
+      
+
+                    <Button variant="outline-success" onClick={getProductHandlerOnId} className="search-btn" >Search</Button>
+                </Form>
+
+
+              </Navbar.Collapse>
+            </Container>
+        </Navbar>
         
 
 
       </div>
   
 
-      <div className='add' id='add'>
-        <Button variant='primary' onClick={addShow}>Add Product</Button>
-
-      </div>
+  
        <div className='alert-div' id='alert'>
         <div className='show-alert'>
           <Alert variant="success">
@@ -267,16 +364,20 @@ function App() {
       </div>
      
 
-      <div className='input-div' id='input'>
+      <div className='input-div'>
         <form onSubmit={submitHandler}>
-          <input type="text" name="productName" id="name" placeholder='Enter Product Name '  /> <br />
+          <input type="text" name="productName" id="name" placeholder='Enter Product Name ' required onBlur={nameHandler} onChange={nameError}  /> <br />
+          <span className='emptyError'>Don't leave field empty!</span>
+          <span className='lengthError'>Your Value should be greater than two characters</span>
 
-          <input type="text" name="price" id="price" placeholder='Enter Product Price'  /> <br />
 
-          <textarea name="description" id="" cols="80" rows="5" placeholder='Enter Product Description...'></textarea>
+          <input type="number" name="price" id="price" placeholder='Enter Product Price' required  /> <br />
 
-          <Button variant="outline-success" type='submit' className='btn' onClick={alertHandler}>Add Product</Button>
-          <Button variant="outline-info" className='btn' onClick={allProductsHandler}>Get All Products</Button>{' '}
+          <textarea name="description" id="" cols="80" rows="5" placeholder='Enter Product Description...' required maxLength={500} onBlur={descHandler} onChange={descLengthError}></textarea>
+          <span className='descEmptyError'>Don't leave field empty!</span>
+          <span className='descLengthError'>Your Value should be greater than two characters</span>
+
+          <Button variant="outline-success" type='submit' className='btn' >Add Product</Button>
 
 
         </form>
@@ -323,8 +424,8 @@ function App() {
                         <tr>
                           <td>{eachData?.id}</td>
                           <td>{eachData?.names}</td>
-                          <td>{eachData?.price}</td>
-                          <td>{eachData?.description}
+                          <td>Rs.{eachData?.price}</td>
+                          <td>{eachData?.description} <br />
                           <button onClick={()=>{
                             deleteProductHandler(eachData?.id)
 
@@ -359,14 +460,8 @@ function App() {
               
 
                 :
-                <Alert variant="danger" style={{marginTop: "10px"}} onClose={() => setShow(false)} >
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                <p>
-                  There is nothing to show you. Your Product list is empty. You should add
-                  some product first.
-                 
-                </p>
-              </Alert>
+                null
+          
                     
 
         
