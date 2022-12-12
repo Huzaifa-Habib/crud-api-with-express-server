@@ -180,7 +180,6 @@ function App() {
     })
     .then((response) => {
       console.log(response);
-      alert("Your Product got updated check it out.")
       setLoadProduct(!loadProduct)
      
     }, (error) => {
@@ -340,7 +339,7 @@ function App() {
   
 
   
-       <div className='alert-div' id='alert'>
+       {/* <div className='alert-div' id='alert'>
         <div className='show-alert'>
           <Alert variant="success">
             <Alert.Heading>Hurrah!</Alert.Heading>
@@ -361,7 +360,7 @@ function App() {
         </div>
 
     
-      </div>
+      </div> */}
      
 
       <div className='input-div'>
@@ -479,26 +478,27 @@ function App() {
             keyboard={false}
           >
           <Modal.Header>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Update Your Product</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <form onSubmit={updateProductHandler} >
+            <form onSubmit={updateProductHandler} className = "updateForm" >
+              <label>Product Name:</label>
                 <input type="text" defaultValue = {editName} name = "product"
               
                 />
                 <br />
-              
-            
-          
+                <label>Product Price:</label>
                 <input type="text" defaultValue = {editPrice} name = "price"
                   
                 />
                 <br />
+                <label>Description:</label>
+
                 <textarea name="description" id="" cols="80" rows="5" defaultValue={editDesc} 
                  
                 ></textarea>
-              <Button variant="primary" type='submit' >Save Changes</Button>
+              <Button variant="primary" type='submit' className='updateBtn'>Save Changes</Button>
 
             </form>
 

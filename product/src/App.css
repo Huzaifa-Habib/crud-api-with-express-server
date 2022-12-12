@@ -46,7 +46,7 @@ body{
   margin-top: 20px;
 }
 
-textarea{
+.input-div textarea{
   margin-top: 20px !important;
 }
 
@@ -66,7 +66,7 @@ textarea{
   flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
-  width: 25%;
+  width: 40%;
   font-weight: bold !important;
 
 
@@ -161,6 +161,57 @@ table tbody tr td:nth-child(4) button:nth-child(3){
   color: red;
 
 }
+
+.updateForm input{
+  display: block;
+  width: 90%;
+  margin-top: 5px;
+  margin-left: 5px;
+  border: 1px solid rgba(128, 128, 128, 0.247);
+  border-radius: 10px;
+  padding: 5px 5px;
+
+}
+
+.updateForm input:focus{
+  outline: 3px solid dodgerblue;
+}
+.updateForm textarea:focus{
+  outline: 1px solid dodgerblue;
+}
+
+.updateForm label{
+  font-weight: bold;
+}
+
+.updateBtn{
+  width: 40%;
+
+}
+
+
+@media screen and (max-width:680px)  {
+  .input-div{
+    width: calc(80vw);
+    margin-top: 15%;
+  }
+
+  
+}
+
+@media screen and (max-width:420px)  {
+  .input-div{
+    width: calc(95vw);
+    margin-top: 20%;
+  }
+
+  .btn{
+    width: 53%;
+  }
+
+  
+}
+
 
 
 
